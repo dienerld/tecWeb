@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/tecweb_bike?useUnicode=true&allowPublicKeyRetrieval=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
+    username: tecweb
+    password: tecweb
+  jpa:
+    hibernate:
+      ddl-auto: create
+server:
+  servlet:
+    context-path: /api/v1

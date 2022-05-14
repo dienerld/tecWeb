@@ -4,11 +4,14 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
-@Getter
+@Setter()
+@Getter()
 @Entity
 public class Pig {
 
@@ -19,8 +22,8 @@ public class Pig {
     @Column(nullable = false)
     private String sex;
 
-    @Column(nullable = false)
-    private Float weight_average;
+    @Column(nullable = false, name = "weight_average")
+    private Float weightAverage;
 
     @Column(nullable = false, name = "last_vermifuge")
     private Date lastVerfimuge;
@@ -31,4 +34,11 @@ public class Pig {
     @Column(nullable = false, name = "birth_date")
     private Date birthDate;
 
+    @CreationTimestamp()
+    @Column(nullable = false, name = "created_at")
+    private Date created_at;
+
+    @UpdateTimestamp()
+    @Column(nullable = false, name = "updated_at")
+    private Date updated_at;
 }

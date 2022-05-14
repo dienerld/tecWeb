@@ -1,0 +1,14 @@
+version: '3.6'
+
+services:
+  database_tecweb:
+    image: mysql
+    container_name: tecweb
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_USER: 'tecweb'
+      MYSQL_PASSWORD: 'tecweb'
+      MYSQL_DATABASE: 'tecweb'
+    network_mode: host

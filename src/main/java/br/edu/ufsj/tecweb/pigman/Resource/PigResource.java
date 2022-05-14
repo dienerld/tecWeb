@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Bean;
@@ -32,17 +33,19 @@ public class PigResource {
     }
 
     @PostMapping()
-    public ResponseEntity<Pig> create(@RequestBody PigDto entity) throws URISyntaxException {
+    public ResponseEntity<Pig> create(@RequestBody @Valid PigDto entity) throws URISyntaxException {
 
         var newPig = new Pig();
         BeanUtils.copyProperties(entity, newPig);
 
         newPig = this.pigService.save(newPig);
-        return ResponseEntity.created(new URI("/api/pig" + newPig.getId())).body(newPig);
+        return ResponseEntity.created(new URI("pigs/" + newPig.getId())).body(newPig);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Pig> update(@PathVariable Long id, @RequestBody PigDto entity) throws Exception {
+    public ResponseEntity<Pig> update(
+            @PathVariable(value = "id") Long id,
+            @RequestBody @Valid PigDto entity) throws Exception {
 
         Optional<Pig> pigOptional = this.pigService.findById(id);
 
@@ -58,7 +61,7 @@ public class PigResource {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable(value = "id") Long id) {
         this.pigService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

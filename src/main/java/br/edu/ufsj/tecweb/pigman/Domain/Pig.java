@@ -10,8 +10,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter()
-@Getter()
+@Setter
+@Getter
 @Entity
 public class Pig {
 
@@ -21,9 +21,6 @@ public class Pig {
 
     @Column(nullable = false)
     private String sex;
-
-    @Column(nullable = false, name = "weight_average")
-    private Float weightAverage;
 
     @Column(nullable = false, name = "last_vermifuge")
     private Date lastVerfimuge;
@@ -41,4 +38,8 @@ public class Pig {
     @UpdateTimestamp()
     @Column(nullable = false, name = "updated_at")
     private Date updated_at;
+
+    @ManyToOne
+    @JoinColumn(name = "stall_id")
+    private Stall stall;
 }

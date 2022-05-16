@@ -7,8 +7,8 @@ import br.edu.ufsj.tecweb.pigman.Domain.Pig;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter()
-@Setter()
+@Getter
+@Setter
 public class StallDto {
 
     private Date lastRemoval;

@@ -10,8 +10,6 @@ import javax.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.ufsj.tecweb.pigman.Domain.Stall;
 import br.edu.ufsj.tecweb.pigman.Service.StallService;

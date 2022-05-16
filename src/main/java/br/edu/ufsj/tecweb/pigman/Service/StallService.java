@@ -15,7 +15,6 @@ public class StallService {
 
     StallService(StallRepository repository) {
         this.repository = repository;
-        ;
     }
 
     @Transactional

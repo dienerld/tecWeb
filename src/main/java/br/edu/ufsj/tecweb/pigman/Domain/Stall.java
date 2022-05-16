@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,6 +29,17 @@ public class Stall {
     @Column(nullable = false, name = "weight_average")
     private Float weightAverage;
 
+    @CreationTimestamp()
+    @Column(nullable = false, name = "created_at")
+    private Date created_at;
+
+    @UpdateTimestamp()
+    @Column(nullable = false, name = "updated_at")
+    private Date updated_at;
+
     @OneToMany(mappedBy = "stall")
     private List<Pig> pigs;
+
+    @OneToMany(mappedBy = "stall")
+    private List<Food> foods;
 }

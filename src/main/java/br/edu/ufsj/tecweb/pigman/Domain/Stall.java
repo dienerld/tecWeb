@@ -35,9 +35,11 @@ public class Stall {
     private Date updated_at;
 
     @OneToMany(mappedBy = "stall", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Pig> pigs;
 
     @OneToMany(mappedBy = "stall")
+    @JsonIgnore
     private List<Food> foods;
 
     // getters and setters

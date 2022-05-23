@@ -41,4 +41,8 @@ public class PigService {
         return this.pigRepository.findById(id);
     }
 
+    public Optional<Pig> findByIdWithStall(Long id) {
+        return this.pigRepository.findOneWithStallById(id);
+    }
+
 }

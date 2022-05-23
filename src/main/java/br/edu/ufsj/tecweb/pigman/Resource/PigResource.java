@@ -5,16 +5,14 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.edu.ufsj.tecweb.pigman.Domain.Pig;
+import br.edu.ufsj.tecweb.pigman.Domain.Stall;
 import br.edu.ufsj.tecweb.pigman.Service.PigService;
 import br.edu.ufsj.tecweb.pigman.dtos.PigDto;
 
@@ -32,13 +30,22 @@ public class PigResource {
         return this.pigService.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Optional<Pig> findByIdWithStall(@PathVariable(value = "id") Long id) {
+        return this.pigService.findByIdWithStall(id);
+    }
+
     @PostMapping()
-    public ResponseEntity<Pig> create(@RequestBody @Valid PigDto entity) throws URISyntaxException {
+    public ResponseEntity<Pig> create(@RequestBody PigDto entity) throws URISyntaxException {
 
         var newPig = new Pig();
         BeanUtils.copyProperties(entity, newPig);
 
+        var stall = new Stall();
+        stall.setId(entity.getStallId());
+        newPig.setStall(stall);
         newPig = this.pigService.save(newPig);
+
         return ResponseEntity.created(new URI("pigs/" + newPig.getId())).body(newPig);
     }
 
@@ -57,7 +64,7 @@ public class PigResource {
         BeanUtils.copyProperties(entity, newPig);
         newPig.setId(pigOptional.get().getId());
 
-        return ResponseEntity.status(201).body(this.pigService.save(this.pigService.save(newPig)));
+        return ResponseEntity.status(201).body(this.pigService.save(newPig));
     }
 
     @DeleteMapping("/{id}")

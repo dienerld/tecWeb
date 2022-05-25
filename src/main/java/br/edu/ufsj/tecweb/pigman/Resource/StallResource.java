@@ -42,6 +42,7 @@ public class StallResource {
 
     @PutMapping("/{id}")
     public String putStalls(@PathVariable("id") Long id) {
+
         return "Hello World";
     }
 

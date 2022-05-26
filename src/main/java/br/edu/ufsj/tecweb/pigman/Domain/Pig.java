@@ -9,6 +9,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity(name = "pig")
 public class Pig {
 
@@ -28,9 +33,6 @@ public class Pig {
     @Column(nullable = false, name = "entry_date")
     private Date entryDate;
 
-    @Column(nullable = false, name = "birth_date")
-    private Date birthDate;
-
     @CreationTimestamp()
     @Column(nullable = false, name = "created_at")
     private Date created_at;
@@ -44,61 +46,13 @@ public class Pig {
     @JoinColumn(name = "stall_id")
     private Stall stall;
 
-    // getters and setters
-    public Long getId() {
-        return id;
-    }
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "pig")
+    @JsonIgnore
+    private Slaugther slaugther;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public Date getLastVerfimuge() {
-        return lastVerfimuge;
-    }
-
-    public void setLastVerfimuge(Date lastVerfimuge) {
-        this.lastVerfimuge = lastVerfimuge;
-    }
-
-    public Float getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Float weight) {
-        this.weight = weight;
-    }
-
-    public Date getEntryDate() {
-        return entryDate;
-    }
-
-    public void setEntryDate(Date entryDate) {
-        this.entryDate = entryDate;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public Stall getStall() {
-        return stall;
-    }
-
-    public void setStall(Stall stall) {
-        this.stall = stall;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @JoinColumn(name = "birth_id")
+    private Birth birth;
 
 }

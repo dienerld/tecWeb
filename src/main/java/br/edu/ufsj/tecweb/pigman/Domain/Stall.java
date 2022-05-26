@@ -10,6 +10,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity(name = "stall")
 public class Stall {
 
@@ -41,59 +46,4 @@ public class Stall {
     @OneToMany(mappedBy = "stall")
     @JsonIgnore
     private List<Food> foods;
-
-    // getters and setters
-    public long getId() {
-        return Id;
-    }
-
-    public void setId(long id) {
-        Id = id;
-    }
-
-    public Date getLastRemoval() {
-        return lastRemoval;
-    }
-
-    public void setLastRemoval(Date lastRemoval) {
-        this.lastRemoval = lastRemoval;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Float getWeightAverage() {
-        return weightAverage;
-    }
-
-    public void setWeightAverage(Float weightAverage) {
-        this.weightAverage = weightAverage;
-    }
-
-    public Date getUpdated_at() {
-        return updated_at;
-    }
-
-    public List<Pig> getPigs() {
-        return pigs;
-    }
-
-    public void setPigs(List<Pig> pigs) {
-        this.pigs = pigs;
-    }
-
-    @JsonIgnore
-    public List<Food> getFoods() {
-        return foods;
-    }
-
-    @JsonIgnore
-    public void setFoods(List<Food> foods) {
-        this.foods = foods;
-    }
 }

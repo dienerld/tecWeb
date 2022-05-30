@@ -1,8 +1,11 @@
 package br.edu.ufsj.tecweb.pigman.Domain;
 
+import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,5 +14,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Mother extends Pig {
-    private final List<Pig> pigs;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column()
+    private Date cobertura;
+
+    @OneToMany(mappedBy = "mother")
+    @JsonIgnore
+    private List<Pig> pigs;
 }

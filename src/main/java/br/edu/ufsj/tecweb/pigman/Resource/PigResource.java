@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import br.edu.ufsj.tecweb.pigman.Domain.Pig;
 import br.edu.ufsj.tecweb.pigman.Domain.Stall;
 import br.edu.ufsj.tecweb.pigman.Service.PigService;
-import br.edu.ufsj.tecweb.pigman.dtos.PigDto;
+import br.edu.ufsj.tecweb.pigman.dtos.PigDTO;
 
 @RestController
 @RequestMapping("/pigs")
@@ -36,7 +36,7 @@ public class PigResource {
     }
 
     @PostMapping()
-    public ResponseEntity<Pig> create(@RequestBody PigDto entity) throws URISyntaxException {
+    public ResponseEntity<Pig> create(@RequestBody PigDTO entity) throws URISyntaxException {
 
         var newPig = new Pig();
         BeanUtils.copyProperties(entity, newPig);
@@ -52,7 +52,7 @@ public class PigResource {
     @PutMapping("/{id}")
     public ResponseEntity<Pig> update(
             @PathVariable(value = "id") Long id,
-            @RequestBody @Valid PigDto entity) throws Exception {
+            @RequestBody @Valid PigDTO entity) throws Exception {
 
         Optional<Pig> pigOptional = this.pigService.findById(id);
 

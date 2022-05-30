@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import br.edu.ufsj.tecweb.pigman.Domain.Stall;
 import br.edu.ufsj.tecweb.pigman.Service.StallService;
-import br.edu.ufsj.tecweb.pigman.dtos.StallDto;
+import br.edu.ufsj.tecweb.pigman.dtos.StallDTO;
 
 @RestController
 @RequestMapping("/stalls")
@@ -31,7 +31,7 @@ public class StallResource {
     }
 
     @PostMapping()
-    public ResponseEntity<Stall> postStalls(@RequestBody @Valid StallDto entityBody) throws URISyntaxException {
+    public ResponseEntity<Stall> postStalls(@RequestBody @Valid StallDTO entityBody) throws URISyntaxException {
         var newStall = new Stall();
         BeanUtils.copyProperties(entityBody, newStall);
 

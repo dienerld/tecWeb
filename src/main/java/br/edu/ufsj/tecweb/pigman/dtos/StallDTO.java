@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class StallDto {
+public class StallDTO {
     @NotBlank
     private String name;
 

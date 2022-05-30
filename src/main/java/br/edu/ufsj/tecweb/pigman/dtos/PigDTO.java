@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PigDto {
+public class PigDTO {
 
     private Date lastVerfimuge;
     private String sex;

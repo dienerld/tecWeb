@@ -24,7 +24,7 @@ public class SlaugtherResource {
 
     @GetMapping
     public String get() {
-        return "SlaugtherResource";
+        return this.slaugtherService.findAll();
     }
 
     @PostMapping

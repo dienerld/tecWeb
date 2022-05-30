@@ -21,4 +21,8 @@ public class SlaugtherService {
         this.slaugtherRepository.deleteById(id);
         return;
     }
+
+    public String findAll() {
+        return null;
+    }
 }

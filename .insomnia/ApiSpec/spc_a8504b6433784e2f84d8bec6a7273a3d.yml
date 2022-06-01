@@ -1,7 +1,7 @@
 _id: spc_a8504b6433784e2f84d8bec6a7273a3d
 type: ApiSpec
 parentId: wrk_73b2d6f6c364491a8faa157b3d1fba62
-modified: 1654107358359
+modified: 1654107828361
 created: 1654106373527
 fileName: pigMan.yaml
 contents: >-
@@ -19,14 +19,11 @@ contents: >-
       url: http://www.apache.org/licenses/LICENSE-2.0.html
   tags:
     - name: stall
-      description: Everything about your Pets
-      externalDocs:
-        description: Find out more
-        url: http://swagger.io
-    - name: store
-      description: Access to Petstore orders
-    - name: user
-      description: Operations about user
+      description: Informações as baias
+    - name: pig
+      description: Informações sobre porcos
+    - name: food
+      description: Informações sobre gastos de rações
       externalDocs:
         description: Find out more about our store
         url: http://swagger.io

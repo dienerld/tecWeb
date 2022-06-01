@@ -6,9 +6,8 @@ created: 1654106373527
 fileName: pigMan.yaml
 contents: >-
   openapi: 3.0.0
-
   info:
-    description: "Api para sistema de gerenciamento de granjas de suino"
+    description: "Api para sistema de gerenciamento de granjas de suíno"
     version: 1.0.0
     title: Pig Manager
     termsOfService: http://swagger.io/terms/
@@ -24,117 +23,49 @@ contents: >-
       description: Informações sobre porcos
     - name: food
       description: Informações sobre gastos de rações
-      externalDocs:
-        description: Find out more about our store
-        url: http://swagger.io
   servers:
     - url: https://localhost:8080/v1
 
   paths:
-    /pet:
+    # PIGS
+    # /pigs
+    /pigs:
       post:
         tags:
-          - pet
-        summary: Add a new pet to the store
+          - pig
+        summary: Adiciona um novo porco
         description: ""
-        operationId: addPet
+        operationId: addPig
         requestBody:
-          $ref: "#/components/requestBodies/Pet"
+          $ref: "#/components/requestBodies/Pig"
         responses:
           "405":
             description: Invalid input
-      put:
+
+      get:
         tags:
-          - pet
-        summary: Update an existing pet
+          - pig
+        summary: Lista todos os porcos
         description: ""
-        operationId: updatePet
-        requestBody:
-          $ref: "#/components/requestBodies/Pet"
-        responses:
-          "400":
-            description: Invalid ID supplied
-          "404":
-            description: Pet not found
-          "405":
-            description: Validation exception
-    /pet/findByStatus:
-      get:
-        tags:
-          - pet
-        summary: Finds Pets by status
-        description: Multiple status values can be provided with comma separated strings
-        operationId: findPetsByStatus
-        parameters:
-          - name: status
-            in: query
-            description: Status values that need to be considered for filter
-            required: true
-            explode: true
-            schema:
-              type: array
-              items:
-                type: string
-                enum:
-                  - available
-                  - pending
-                  - sold
-                default: available
+        operationId: listPig
         responses:
           "200":
-            description: successful operation
+            description: Lista de porcos
             content:
-              application/xml:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Pet"
               application/json:
                 schema:
                   type: array
                   items:
                     $ref: "#/components/schemas/Pet"
           "400":
-            description: Invalid status value
-    /pet/findByTags:
+            description: Id inválido
+    # end /pigs
+
+    # start /pigs/id
+    "/pigs/{pigId}":
       get:
         tags:
-          - pet
-        summary: Finds Pets by tags
-        description: Multiple tags can be provided with comma separated strings. Use tag1,
-          tag2, tag3 for testing.
-        operationId: findPetsByTags
-        parameters:
-          - name: tags
-            in: query
-            description: Tags to filter by
-            required: true
-            explode: true
-            schema:
-              type: array
-              items:
-                type: string
-        responses:
-          "200":
-            description: successful operation
-            content:
-              application/xml:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Pet"
-              application/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Pet"
-          "400":
-            description: Invalid tag value
-        deprecated: true
-    "/pet/{petId}":
-      get:
-        tags:
-          - pet
+          - pig
         summary: Find pet by ID
         description: Returns a single pet
         operationId: getPetById
@@ -150,9 +81,6 @@ contents: >-
           "200":
             description: successful operation
             content:
-              application/xml:
-                schema:
-                  $ref: "#/components/schemas/Pet"
               application/json:
                 schema:
                   $ref: "#/components/schemas/Pet"
@@ -160,155 +88,146 @@ contents: >-
             description: Invalid ID supplied
           "404":
             description: Pet not found
-      post:
+      put:
         tags:
-          - pet
-        summary: Updates a pet in the store with form data
+          - pig
+        summary: Atualiza dados de um porco existente
         description: ""
-        operationId: updatePetWithForm
-        parameters:
-          - name: petId
-            in: path
-            description: ID of pet that needs to be updated
-            required: true
-            schema:
-              type: integer
-              format: int64
+        operationId: updatePig
         requestBody:
-          content:
-            application/x-www-form-urlencoded:
-              schema:
-                type: object
-                properties:
-                  name:
-                    description: Updated name of the pet
-                    type: string
-                  status:
-                    description: Updated status of the pet
-                    type: string
-        responses:
-          "405":
-            description: Invalid input
-      delete:
-        tags:
-          - pet
-        summary: Deletes a pet
-        description: ""
-        operationId: deletePet
-        parameters:
-          - name: api_key
-            in: header
-            required: false
-            schema:
-              type: string
-          - name: petId
-            in: path
-            description: Pet id to delete
-            required: true
-            schema:
-              type: integer
-              format: int64
+          $ref: "#/components/requestBodies/Pig"
         responses:
           "400":
-            description: Invalid ID supplied
+            description: Id inválido
           "404":
-            description: Pet not found
-    /store/inventory:
+            description: Porco não encontrado
+
+      delete:
+        tags:
+          - pig
+        summary: Remove um porco existente
+        description: ""
+        operationId: deletePig
+        parameters:
+          - name: pigId
+            in: path
+            description: ID do porco a ser excluído
+            required: true
+            schema:
+              type: integer
+              format: Long
+        responses:
+          "400":
+            description: Id inválido
+          "404":
+            description: Porco não encontrado
+
+    # end /pigs/id
+    # END PIGS
+    /stalls:
       get:
         tags:
-          - store
-        summary: Returns pet inventories by status
-        description: Returns a map of status codes to quantities
-        operationId: getInventory
+          - stall
+        summary: Lista todas as baias
+        description: ""
+        operationId: listStall
         responses:
           "200":
-            description: successful operation
+            description: Operação bem sucedida
             content:
               application/json:
                 schema:
-                  type: object
-                  additionalProperties:
-                    type: integer
-                    format: int32
-    /store/order:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      # JsonSchema:
+                      id:
+                        type: integer
+                        format: Long
+                      petId:
+                        type: integer
+                        format: int64
+      #End Get
+
       post:
         tags:
-          - store
-        summary: Place an order for a pet
+          - stall
+        summary: Adiciona uma nova baia
         description: ""
-        operationId: placeOrder
+        operationId: addStall
         requestBody:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Order"
-          description: order placed for purchasing the pet
+                $ref: "#/components/schemas/Stall"
+          description: Dados da baia a ser adicionada
           required: true
         responses:
           "200":
             description: successful operation
             content:
-              application/xml:
-                schema:
-                  $ref: "#/components/schemas/Order"
               application/json:
                 schema:
-                  $ref: "#/components/schemas/Order"
+                  $ref: "#/components/schemas/Stall"
           "400":
-            description: Invalid Order
-    "/store/order/{orderId}":
+            description: Dados de baia inválidos
+      # End Post
+
+    "/stalls/{stallId}":
+      # Get/id
       get:
         tags:
-          - store
-        summary: Find purchase order by ID
-        description: For valid response try integer IDs with value >= 1 and <= 10. Other
+          - stall
+        summary: Buscar baia pelo Id
+        description:
+          For valid response try integer IDs with value >= 1 and <= 10. Other
           values will generated exceptions
-        operationId: getOrderById
+        operationId: getStallById
         parameters:
-          - name: orderId
+          - name: stallId
             in: path
-            description: ID of pet that needs to be fetched
+            description: ID da baia a ser Buscada
             required: true
             schema:
               type: integer
-              format: int64
-              minimum: 1
-              maximum: 10
+              format: Long
         responses:
           "200":
-            description: successful operation
+            description: Operação bem sucedida
             content:
-              application/xml:
-                schema:
-                  $ref: "#/components/schemas/Order"
               application/json:
                 schema:
-                  $ref: "#/components/schemas/Order"
+                  $ref: "#/components/schemas/Stall"
           "400":
-            description: Invalid ID supplied
+            description: Id inválido
           "404":
-            description: Order not found
+            description: Baia não encontrada
+      # End Get/id
+      # Delete/id
       delete:
         tags:
-          - store
-        summary: Delete purchase order by ID
-        description: For valid response try integer IDs with positive integer value. Negative
-          or non-integer values will generate API errors
-        operationId: deleteOrder
+          - stall
+        summary: Remove baia existente
+        description: ""
+        operationId: deleteStall
         parameters:
-          - name: orderId
+          - name: stallId
             in: path
-            description: ID of the order that needs to be deleted
+            description: ID da baia a ser excluída
             required: true
             schema:
               type: integer
-              format: int64
+              format: Long
               minimum: 1
         responses:
           "400":
-            description: Invalid ID supplied
+            description: Id inválido
           "404":
-            description: Order not found
+            description: Baia não encontrada
+    # End Delete/id
+    # End /stalls/id
+
     /user:
       post:
         tags:
@@ -385,9 +304,6 @@ contents: >-
                   type: string
                   format: date-time
             content:
-              application/xml:
-                schema:
-                  type: string
               application/json:
                 schema:
                   type: string
@@ -421,9 +337,6 @@ contents: >-
           "200":
             description: successful operation
             content:
-              application/xml:
-                schema:
-                  $ref: "#/components/schemas/User"
               application/json:
                 schema:
                   $ref: "#/components/schemas/User"
@@ -489,18 +402,16 @@ contents: >-
                 $ref: "#/components/schemas/User"
         description: List of user object
         required: true
-      Pet:
+      Pig:
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/Pet"
-          application/xml:
-            schema:
-              $ref: "#/components/schemas/Pet"
+
         description: Pet object that needs to be added to the store
         required: true
     schemas:
-      Order:
+      Stall:
         type: object
         properties:
           id:
@@ -525,8 +436,6 @@ contents: >-
           complete:
             type: boolean
             default: false
-        xml:
-          name: Order
       User:
         type: object
         properties:
@@ -549,8 +458,6 @@ contents: >-
             type: integer
             format: int32
             description: User Status
-        xml:
-          name: User
       Category:
         type: object
         properties:
@@ -559,8 +466,7 @@ contents: >-
             format: int64
           name:
             type: string
-        xml:
-          name: Category
+
       Tag:
         type: object
         properties:
@@ -569,8 +475,6 @@ contents: >-
             format: int64
           name:
             type: string
-        xml:
-          name: Tag
       Pet:
         type: object
         required:
@@ -587,16 +491,10 @@ contents: >-
             example: doggie
           photoUrls:
             type: array
-            xml:
-              name: photoUrl
-              wrapped: true
             items:
               type: string
           tags:
             type: array
-            xml:
-              name: tag
-              wrapped: true
             items:
               $ref: "#/components/schemas/Tag"
           status:
@@ -606,8 +504,7 @@ contents: >-
               - available
               - pending
               - sold
-        xml:
-          name: Pet
+
       ApiResponse:
         type: object
         properties:
@@ -618,4 +515,5 @@ contents: >-
             type: string
           message:
             type: string
+
 contentType: yaml

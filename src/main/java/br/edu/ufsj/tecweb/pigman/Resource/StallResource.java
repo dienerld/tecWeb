@@ -3,6 +3,7 @@ package br.edu.ufsj.tecweb.pigman.Resource;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -29,10 +30,20 @@ public class StallResource {
         return this.stallService.findAll();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Stall>> getById(@PathVariable("id") Long id) {
+        try {
+            var stall = this.stallService.findById(id);
+            return ResponseEntity.ok(stall);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PostMapping()
-    public ResponseEntity<Stall> postStalls(@RequestBody @Valid StallDTO entityBody) throws URISyntaxException {
+    public ResponseEntity<Stall> create(@RequestBody @Valid StallDTO stallDto) throws URISyntaxException {
         var newStall = new Stall();
-        BeanUtils.copyProperties(entityBody, newStall);
+        BeanUtils.copyProperties(stallDto, newStall);
 
         stallService.save(newStall);
 
@@ -40,9 +51,18 @@ public class StallResource {
     }
 
     @PutMapping("/{id}")
-    public String putStalls(@PathVariable("id") Long id) {
+    public ResponseEntity<Stall> update(@PathVariable("id") Long id,
+            @RequestBody StallDTO stallDto) throws Exception {
+        var stall = this.stallService.findById(id).get();
 
-        return "Hello World";
+        if (stall == null) {
+            throw new Exception("Pig not found");
+        }
+
+        BeanUtils.copyProperties(stallDto, stall);
+        this.stallService.save(stall);
+
+        return ResponseEntity.ok(stall);
     }
 
     @DeleteMapping("/{id}")

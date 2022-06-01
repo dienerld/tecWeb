@@ -36,13 +36,13 @@ public class PigResource {
     }
 
     @PostMapping()
-    public ResponseEntity<Pig> create(@RequestBody PigDTO entity) throws URISyntaxException {
+    public ResponseEntity<Pig> create(@RequestBody PigDTO pigDto) throws URISyntaxException {
 
         var newPig = new Pig();
-        BeanUtils.copyProperties(entity, newPig);
+        BeanUtils.copyProperties(pigDto, newPig);
 
         var stall = new Stall();
-        stall.setId(entity.getStallId());
+        stall.setId(pigDto.getStallId());
         newPig.setStall(stall);
         newPig = this.pigService.save(newPig);
 
@@ -52,19 +52,17 @@ public class PigResource {
     @PutMapping("/{id}")
     public ResponseEntity<Pig> update(
             @PathVariable(value = "id") Long id,
-            @RequestBody @Valid PigDTO entity) throws Exception {
+            @RequestBody @Valid PigDTO pigDto) throws Exception {
 
-        Optional<Pig> pigOptional = this.pigService.findById(id);
+        var pig = this.pigService.findById(id).get();
 
-        if (!pigOptional.isPresent()) {
+        if (pig == null) {
             throw new Exception("Pig not found");
         }
 
-        var newPig = new Pig();
-        BeanUtils.copyProperties(entity, newPig);
-        newPig.setId(pigOptional.get().getId());
+        BeanUtils.copyProperties(pigDto, pig);
 
-        return ResponseEntity.status(201).body(this.pigService.save(newPig));
+        return ResponseEntity.status(201).body(this.pigService.save(pig));
     }
 
     @DeleteMapping("/{id}")

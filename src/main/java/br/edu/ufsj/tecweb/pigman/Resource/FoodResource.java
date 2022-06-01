@@ -7,12 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import br.edu.ufsj.tecweb.pigman.Domain.Food;
 import br.edu.ufsj.tecweb.pigman.Service.FoodService;
@@ -44,12 +39,29 @@ public class FoodResource {
     }
 
     @PostMapping()
-    public ResponseEntity<Food> save(@RequestBody() FoodDTO entityDTO) throws URISyntaxException {
+    public ResponseEntity<Food> save(@RequestBody() FoodDTO foodDTO) throws URISyntaxException {
         var food = new Food();
-        BeanUtils.copyProperties(entityDTO, food);
+        BeanUtils.copyProperties(foodDTO, food);
         var newFood = this.foodService.save(food);
 
         return ResponseEntity.created(
                 new URI("/foods/" + newFood.getId())).body(newFood);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Food> update(@PathVariable(value = "id") Long id, @RequestBody() FoodDTO foodDTO) {
+        var food = new Food();
+        BeanUtils.copyProperties(foodDTO, food);
+        var updatedFood = this.foodService.save(food);
+
+        return ResponseEntity.ok(updatedFood);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable(value = "id") Long id) {
+        this.foodService.delete(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
 }

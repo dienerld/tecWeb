@@ -28,4 +28,10 @@ public class FoodService {
         return this.foodRepository.findById(id);
     }
 
+    public void delete(Long id) {
+        this.foodRepository.deleteById(id);
+
+        return;
+    }
+
 }

@@ -2,12 +2,12 @@ package br.edu.ufsj.tecweb.pigman.Resource;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import br.edu.ufsj.tecweb.pigman.Domain.Pig;
 import br.edu.ufsj.tecweb.pigman.Domain.Slaugther;
 import br.edu.ufsj.tecweb.pigman.Service.SlaugtherService;
 import br.edu.ufsj.tecweb.pigman.dtos.SlaugtherDTO;
@@ -23,14 +23,15 @@ public class SlaugtherResource {
     }
 
     @GetMapping
-    public String get() {
-        return this.slaugtherService.findAll();
+    public ResponseEntity<List<Slaugther>> findAll() {
+        var list = this.slaugtherService.findAll();
+        return ResponseEntity.ok(list);
     }
 
     @PostMapping
-    public ResponseEntity<Slaugther> create(@RequestBody SlaugtherDTO entityDTO) throws URISyntaxException {
+    public ResponseEntity<Slaugther> create(@RequestBody SlaugtherDTO slaugtherDto) throws URISyntaxException {
         var newSlaugther = new Slaugther();
-        BeanUtils.copyProperties(entityDTO, newSlaugther);
+        BeanUtils.copyProperties(slaugtherDto, newSlaugther);
 
         var slaugtherSaved = this.slaugtherService.save(newSlaugther);
 
@@ -39,14 +40,14 @@ public class SlaugtherResource {
 
     @PutMapping("/{id}")
     public ResponseEntity<Slaugther> update(@PathVariable(value = "id") Long id,
-            @RequestBody SlaugtherDTO entityDTO) {
-        var slaugther = new Slaugther();
+            @RequestBody SlaugtherDTO slaugtherDto) throws Exception {
 
-        BeanUtils.copyProperties(entityDTO, slaugther);
-        slaugther.setId(id);
-        var pig = new Pig();
-        pig.setId(entityDTO.getIdPig());
-        slaugther.setPig(pig);
+        var slaugther = this.slaugtherService.findById(id).get();
+        if (slaugther == null) {
+            throw new Exception("slaugther not found");
+        }
+        BeanUtils.copyProperties(slaugtherDto, slaugther);
+        this.slaugtherService.save(slaugther);
 
         return ResponseEntity.ok(slaugther);
     }

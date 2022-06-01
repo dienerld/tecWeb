@@ -13,36 +13,36 @@ import br.edu.ufsj.tecweb.pigman.Repository.PigRepository;
 @Service
 public class PigService {
 
-    private final PigRepository pigRepository;
+    private final PigRepository repository;
 
     PigService(PigRepository repository) {
-        this.pigRepository = repository;
+        this.repository = repository;
     }
 
     public List<Pig> findAll() {
-        return this.pigRepository.findAll();
+        return this.repository.findAll();
     }
 
     @Transactional()
     public Pig save(Pig entity) {
-        return this.pigRepository.save(entity);
+        return this.repository.save(entity);
     }
 
     public boolean existsById(Long id) {
-        return this.pigRepository.existsById(id);
+        return this.repository.existsById(id);
     }
 
     @Transactional()
     public void deleteById(Long id) {
-        this.pigRepository.deleteById(id);
+        this.repository.deleteById(id);
     }
 
     public Optional<Pig> findById(Long id) {
-        return this.pigRepository.findById(id);
+        return this.repository.findById(id);
     }
 
     public Optional<Pig> findByIdWithStall(Long id) {
-        return this.pigRepository.findOneWithStallById(id);
+        return this.repository.findOneWithStallById(id);
     }
 
 }

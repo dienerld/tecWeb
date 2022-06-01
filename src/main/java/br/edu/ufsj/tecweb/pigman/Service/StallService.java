@@ -1,6 +1,7 @@
 package br.edu.ufsj.tecweb.pigman.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -24,6 +25,10 @@ public class StallService {
 
     public List<Stall> findAll() {
         return this.repository.findAll();
+    }
+
+    public Optional<Stall> findById(Long id) {
+        return this.repository.findById(id);
     }
 
 }

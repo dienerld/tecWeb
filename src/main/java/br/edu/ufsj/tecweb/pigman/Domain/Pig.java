@@ -50,14 +50,4 @@ public class Pig {
     @JsonIgnore
     private Slaugther slaugther;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
-    @JoinColumn(name = "birth_id")
-    private Birth birth;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
-    @JoinColumn(name = "mother_id")
-    private Mother mother;
-
 }

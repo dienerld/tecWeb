@@ -2,7 +2,6 @@ package br.edu.ufsj.tecweb.pigman.Resource;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.sql.ResultSet;
 import java.util.List;
 
 import javax.validation.Valid;

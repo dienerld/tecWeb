@@ -325,13 +325,13 @@ paths:
     put:
       tags:
         - food
-      summary: Atualiza dados de um porco existente
+      summary: Atualiza dados de uma ração existente
       description: ""
       operationId: updatePig
       parameters:
         - name: foodId
           in: path
-          description: ID of pet to return
+          description: ID da ração a ser atualizada
           required: true
           schema:
             type: integer
@@ -342,7 +342,7 @@ paths:
         "400":
           description: Id inválido
         "404":
-          description: Porco não encontrado
+          description: Cadastro de ração não encontrado
     # End Put/id
 
 components:

@@ -11,4 +11,10 @@ services:
       MYSQL_USER: 'tecweb'
       MYSQL_PASSWORD: 'tecweb'
       MYSQL_DATABASE: 'tecweb'
+    volumes:
+      - mysqldata:/var/lib/mysql
     network_mode: host
+
+volumes:
+  mysqldata:
+    driver: local

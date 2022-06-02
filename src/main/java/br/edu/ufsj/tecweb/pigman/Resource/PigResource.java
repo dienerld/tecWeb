@@ -16,6 +16,7 @@ import br.edu.ufsj.tecweb.pigman.Domain.Stall;
 import br.edu.ufsj.tecweb.pigman.Service.PigService;
 import br.edu.ufsj.tecweb.pigman.dtos.PigDTO;
 
+// @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/pigs")
 public class PigResource {
@@ -27,17 +28,31 @@ public class PigResource {
 
     @GetMapping()
     public List<Pig> listAll() {
+        System.out.println("sadas");
         return this.pigService.findAll();
     }
 
+    /**
+     * > This function returns a pig with its stall
+     *
+     * @param id the id of the pig
+     * @return A pig with a stall.
+     */
     @GetMapping("/{id}")
     public Optional<Pig> findByIdWithStall(@PathVariable(value = "id") Long id) {
         return this.pigService.findByIdWithStall(id);
     }
 
+    /**
+     * > We create a new pig, copy the properties from the DTO to the new pig, set
+     * the stall id, save
+     * the new pig, and return
+     * 
+     * @param pigDto The object that will be used to create the new pig.
+     * @return A ResponseEntity with the created URI and the newPig object.
+     */
     @PostMapping()
     public ResponseEntity<Pig> create(@RequestBody PigDTO pigDto) throws URISyntaxException {
-
         var newPig = new Pig();
         BeanUtils.copyProperties(pigDto, newPig);
 

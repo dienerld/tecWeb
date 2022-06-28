@@ -1,6 +1,12 @@
 version: '3.6'
 
 services:
+  backend_java:
+    build: .
+    ports:
+      - 8080:8080
+    network_mode: host
+
   database_tecweb:
     image: mysql
     container_name: tecweb
@@ -11,10 +17,4 @@ services:
       MYSQL_USER: 'tecweb'
       MYSQL_PASSWORD: 'tecweb'
       MYSQL_DATABASE: 'tecweb'
-    volumes:
-      - mysqldata:/var/lib/mysql
     network_mode: host
-
-volumes:
-  mysqldata:
-    driver: local

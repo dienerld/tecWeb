@@ -1,0 +1,29 @@
+_id: req_wrk_73b2d6f6c364491a8faa157b3d1fba620d30396c
+type: Request
+parentId: fld_wrk_73b2d6f6c364491a8faa157b3d1fba626e1c6c9e
+modified: 1654191598050
+created: 1654191590186
+url: "{{ base_url }}/stalls"
+name: Adiciona uma nova baia
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+      "name": "string"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_0e616cba3538472c99553b197ff30a6c
+authentication: {}
+metaSortKey: -1654191590186
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

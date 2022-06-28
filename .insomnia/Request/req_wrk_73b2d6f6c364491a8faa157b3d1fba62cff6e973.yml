@@ -1,0 +1,29 @@
+_id: req_wrk_73b2d6f6c364491a8faa157b3d1fba62cff6e973
+type: Request
+parentId: fld_wrk_73b2d6f6c364491a8faa157b3d1fba6239ccb32d
+modified: 1654191590172
+created: 1654191590172
+url: "{{ base_url }}/foods"
+name: Insere um novo gasto de ração
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+      "type": "string",
+      "name": "string"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1654191590172
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

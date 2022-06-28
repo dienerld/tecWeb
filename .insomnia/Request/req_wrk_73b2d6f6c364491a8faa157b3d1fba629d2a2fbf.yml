@@ -1,0 +1,25 @@
+_id: req_wrk_73b2d6f6c364491a8faa157b3d1fba629d2a2fbf
+type: Request
+parentId: fld_wrk_73b2d6f6c364491a8faa157b3d1fba6239ccb32d
+modified: 1654191590170
+created: 1654191590170
+url: "{{ base_url }}/foods/{{ foodId }}"
+name: Atualiza dados de uma ração existente
+description: ""
+method: PUT
+body:
+  mimeType: application/json
+  text: "{}"
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1654191590170
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

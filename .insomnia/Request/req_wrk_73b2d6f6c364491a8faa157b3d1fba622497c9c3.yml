@@ -1,0 +1,21 @@
+_id: req_wrk_73b2d6f6c364491a8faa157b3d1fba622497c9c3
+type: Request
+parentId: fld_wrk_73b2d6f6c364491a8faa157b3d1fba622cd4ba93
+modified: 1654191590179
+created: 1654191590179
+url: "{{ base_url }}/pigs"
+name: Lista todos os porcos
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1654191590179
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

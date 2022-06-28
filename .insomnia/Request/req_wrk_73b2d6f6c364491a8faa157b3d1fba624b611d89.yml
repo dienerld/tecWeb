@@ -1,0 +1,21 @@
+_id: req_wrk_73b2d6f6c364491a8faa157b3d1fba624b611d89
+type: Request
+parentId: fld_wrk_73b2d6f6c364491a8faa157b3d1fba626e1c6c9e
+modified: 1654191590184
+created: 1654191590184
+url: "{{ base_url }}/stalls/{{ stallId }}"
+name: Buscar baia pelo Id
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication: {}
+metaSortKey: -1654191590184
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

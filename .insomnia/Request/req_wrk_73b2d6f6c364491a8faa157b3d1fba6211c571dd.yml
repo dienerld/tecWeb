@@ -1,0 +1,29 @@
+_id: req_wrk_73b2d6f6c364491a8faa157b3d1fba6211c571dd
+type: Request
+parentId: fld_wrk_73b2d6f6c364491a8faa157b3d1fba626e1c6c9e
+modified: 1654191609921
+created: 1654191590182
+url: "{{ base_url }}/stalls/{{ stallId }}"
+name: Atualiza dados de um baia existente
+description: ""
+method: PUT
+body:
+  mimeType: application/json
+  text: |-
+    {
+      "name": "string"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+    id: pair_4d77e6deea294bdd85ee8f5f37637b67
+authentication: {}
+metaSortKey: -1654191590182
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

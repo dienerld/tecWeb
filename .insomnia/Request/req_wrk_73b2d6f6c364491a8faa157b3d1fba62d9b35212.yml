@@ -1,0 +1,33 @@
+_id: req_wrk_73b2d6f6c364491a8faa157b3d1fba62d9b35212
+type: Request
+parentId: fld_wrk_73b2d6f6c364491a8faa157b3d1fba622cd4ba93
+modified: 1654191590181
+created: 1654191590181
+url: "{{ base_url }}/pigs"
+name: Adiciona um novo porco
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+      "sex": "string",
+      "stallId": 0,
+      "weight": 0,
+      "lastVermifuge": "2022-06-02T17:39:50.167Z",
+      "entryDate": "2022-06-02T17:39:50.167Z",
+      "birthDate": "2022-06-02T17:39:50.167Z"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1654191590181
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

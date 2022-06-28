@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   backend_java:
-    build: .
+    build: ./backend
     ports:
       - 8080:8080
     network_mode: host
@@ -17,4 +17,11 @@ services:
       MYSQL_USER: 'tecweb'
       MYSQL_PASSWORD: 'tecweb'
       MYSQL_DATABASE: 'tecweb'
+    network_mode: host
+
+  frontend_anular:
+    build: ./frontend
+    container_name: ang_front
+    volumes:
+      - .:/app
     network_mode: host

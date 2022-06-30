@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TPig } from 'src/app/pages/relatorio/relatorio.service';
+import { TPig } from '&services/reports.service';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  styleUrls: ['./table.component.scss'],
 })
 
 export class TableComponent implements OnInit {

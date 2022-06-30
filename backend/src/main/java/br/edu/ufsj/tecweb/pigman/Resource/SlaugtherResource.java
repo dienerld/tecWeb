@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.edu.ufsj.tecweb.pigman.Domain.Slaugther;
+import br.edu.ufsj.tecweb.pigman.Service.PigService;
 import br.edu.ufsj.tecweb.pigman.Service.SlaugtherService;
 import br.edu.ufsj.tecweb.pigman.dtos.SlaugtherDTO;
 
@@ -17,9 +18,13 @@ import br.edu.ufsj.tecweb.pigman.dtos.SlaugtherDTO;
 public class SlaugtherResource {
 
     private final SlaugtherService slaugtherService;
+    private final PigService pigService;
 
-    public SlaugtherResource(SlaugtherService slaugtherService) {
+    public SlaugtherResource(
+            PigService pigService,
+            SlaugtherService slaugtherService) {
         this.slaugtherService = slaugtherService;
+        this.pigService = pigService;
     }
 
     @GetMapping
@@ -32,10 +37,16 @@ public class SlaugtherResource {
     public ResponseEntity<Slaugther> create(@RequestBody SlaugtherDTO slaugtherDto) throws URISyntaxException {
         var newSlaugther = new Slaugther();
         BeanUtils.copyProperties(slaugtherDto, newSlaugther);
+        var pig = this.pigService.findByIdAndStall(slaugtherDto.getIdPig(), newSlaugther.getStallName()).get();
+        System.out.println(pig);
+        newSlaugther.setPig(pig);
 
         var slaugtherSaved = this.slaugtherService.save(newSlaugther);
-
-        return ResponseEntity.created(new URI("/slaugthers/" + slaugtherSaved.getId())).body(slaugtherSaved);
+        if (slaugtherSaved != null) {
+            this.pigService.deleteById(newSlaugther.getPig().getId());
+            return ResponseEntity.created(new URI("/slaugthers/" + slaugtherSaved.getId())).body(slaugtherSaved);
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     @PutMapping("/{id}")
@@ -44,7 +55,7 @@ public class SlaugtherResource {
 
         var slaugther = this.slaugtherService.findById(id).get();
         if (slaugther == null) {
-            throw new Exception("slaugther not found");
+            return ResponseEntity.badRequest().build();
         }
         BeanUtils.copyProperties(slaugtherDto, slaugther);
         this.slaugtherService.save(slaugther);

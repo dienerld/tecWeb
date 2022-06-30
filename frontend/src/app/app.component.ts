@@ -4,12 +4,15 @@ import { PrimeNGConfig, MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
   title: 'Home';
+
   items: MenuItem[] = [];
+
   activeItem: Object = this.items[0];
+
   constructor(private primengConfig: PrimeNGConfig) {}
 
   ngOnInit() {
@@ -17,7 +20,7 @@ export class AppComponent implements OnInit {
 
     this.items = [
       { label: 'Home', icon: 'pi pi-fw pi-home', routerLink: 'home' },
-      { label: 'Relatorios', icon: 'pi pi-fw pi-calendar', routerLink: 'relatorios' },
+      { label: 'Relatórios', icon: 'pi pi-fw pi-calendar', routerLink: 'reports' },
       { label: 'Abates', icon: 'pi pi-fw pi-calendar', routerLink: 'stalls' },
     ];
     this.activeItem = this.items[0];

@@ -3,16 +3,33 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: [
-    "eslint:recommended",
-    // 'plugin:@typescript-eslint/recommended',
-    "dienerld",
-  ],
-  parser: "@typescript-eslint/parser",
+  extends: ['eslint:recommended', 'airbnb-base'],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
+    ecmaFeatures: {
+      ts: true,
+    },
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
-  plugins: ["@typescript-eslint"],
-  rules: {},
+  plugins: ['@typescript-eslint'],
+  rules: {
+    'import/prefer-default-export': 'off',
+    'import/no-unresolved': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    'object-curly-newline': ['error', { consistent: true }],
+    'import/extensions': ['off'],
+    'no-unused-vars': ['error', { args: 'none' }],
+    'no-useless-constructor': 'off',
+    'no-empty-function': [
+      'error',
+      { allow: ['functions', 'arrowFunctions', 'constructors'] },
+    ],
+  },
+  settings: {
+    'import/export': {
+      typescript: {},
+    },
+  },
 };

@@ -1,8 +1,8 @@
 FROM node:16.14-alpine
 
-WORKDIR /app
+WORKDIR /app/frontend/
 
-COPY . /app/
+COPY . .
 
 EXPOSE 4200
 

@@ -6,23 +6,26 @@ import { SlaughterService, TSlaughter } from '&services/slaughter.service';
 @Component({
   selector: 'app-abates-home',
   templateUrl: './slaughter-home.component.html',
-  styleUrls: ['./slaughter-home.component.scss']
+  styleUrls: ['./slaughter-home.component.scss'],
 })
 export class SlaughterHomeComponent implements OnInit {
   title = 'Abates';
+
   description = 'Ultimo abate de cada baia';
+
   stalls: any[] = [];
+
   columns = [
     { field: 'stallId', header: 'Baia' },
     { field: 'stallName', header: 'Nome da Baia' },
-    { field: 'weigth', header: 'Peso' },
+    { field: 'weight', header: 'Peso' },
     { field: 'date', header: 'Data' },
 
   ];
 
   constructor(
     private readonly service: SlaughterService,
-    private readonly titleService: Title
+    private readonly titleService: Title,
   ) {
   }
 

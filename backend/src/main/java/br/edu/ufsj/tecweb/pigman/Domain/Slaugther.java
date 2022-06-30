@@ -23,6 +23,10 @@ public class Slaugther {
 
     @Column(name = "sell_price")
     private Float sellPrice;
+
+    @Column(name = "stall_name")
+    private String stallName;
+
     @OneToOne()
     @JoinColumn(name = "pig_fk_id", referencedColumnName = "id")
     private Pig pig;

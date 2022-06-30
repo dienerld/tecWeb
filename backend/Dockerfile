@@ -1,6 +1,6 @@
 FROM adoptopenjdk/openjdk16
 
-WORKDIR /app
+WORKDIR /app/backend/
 
 COPY . .
 

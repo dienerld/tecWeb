@@ -13,6 +13,7 @@ public class SlaugtherDTO {
     @NotBlank
     private Long idPig;
     private Date date;
+    private String stallName;
     private Float netWeight;
     private Float sellPrice;
 }

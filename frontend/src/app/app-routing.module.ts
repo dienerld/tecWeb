@@ -5,6 +5,7 @@ import { ReportsComponent } from './pages/reports/reports.component';
 import { SlaughterHomeComponent } from './pages/Slaughter/index/slaughter-homeabates-home.component';
 import { SlaughterListAllComponent } from './pages/Slaughter/listAll/slaughter-list.component';
 import { SlaughterListOneComponent } from './pages/Slaughter/listOne/slaughter-list.component';
+import { AddStallComponent } from './pages/stall/add/add-stall.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -12,7 +13,9 @@ const routes: Routes = [
   { path: 'reports', component: ReportsComponent },
   { path: 'stalls', component: SlaughterHomeComponent },
   { path: 'stalls/all', component: SlaughterListAllComponent },
+  { path: 'stalls/add', component: AddStallComponent },
   { path: 'stalls/:id', component: SlaughterListOneComponent },
+  { path: 'stalls/update/:id', component: SlaughterListOneComponent },
 
 ];
 

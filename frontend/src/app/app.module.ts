@@ -12,14 +12,15 @@ import { CardModule } from 'primeng/card';
 
 import { ButtonModule } from 'primeng/button';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { TableComponent } from './components/table/table.component';
 import { SlaughterHomeComponent } from './pages/Slaughter/index/slaughter-homeabates-home.component';
-import { SlaughterListAllComponent } from './pages/Slaughter/listAll/slaughter-list.component';
-import { SlaughterListOneComponent } from './pages/Slaughter/listOne/slaughter-list.component';
 import { ReportsComponent } from './pages/reports/reports.component';
+import { AddStallComponent } from './pages/stall/add/add-stall.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +29,7 @@ import { ReportsComponent } from './pages/reports/reports.component';
     ReportsComponent,
     TableComponent,
     SlaughterHomeComponent,
-    SlaughterListAllComponent,
-    SlaughterListOneComponent,
+    AddStallComponent,
   ],
   imports: [
     HttpClientModule,
@@ -37,9 +37,12 @@ import { ReportsComponent } from './pages/reports/reports.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MenubarModule,
+    FormsModule,
+    ReactiveFormsModule,
     TableModule,
     ButtonModule,
     MultiSelectModule,
+    InputTextModule,
     DropdownModule,
     ProgressBarModule,
     SliderModule,

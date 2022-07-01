@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import br.edu.ufsj.tecweb.pigman.Domain.Pig;
 import br.edu.ufsj.tecweb.pigman.Domain.Stall;
 import br.edu.ufsj.tecweb.pigman.Service.PigService;
+import br.edu.ufsj.tecweb.pigman.Service.StallService;
 import br.edu.ufsj.tecweb.pigman.dtos.PigDTO;
 
 // @CrossOrigin(origins = "*")
@@ -21,14 +22,16 @@ import br.edu.ufsj.tecweb.pigman.dtos.PigDTO;
 @RequestMapping("/pigs")
 public class PigResource {
     private final PigService pigService;
+    private final StallService stallService;
 
-    PigResource(PigService pigService) {
+    PigResource(PigService pigService, StallService stallService) {
         this.pigService = pigService;
+        this.stallService = stallService;
     }
 
     @GetMapping()
     public List<Pig> listAll() {
-        System.out.println("sadas");
+        System.out.println("sadas1s");
         return this.pigService.findAll();
     }
 
@@ -47,7 +50,7 @@ public class PigResource {
      * > We create a new pig, copy the properties from the DTO to the new pig, set
      * the stall id, save
      * the new pig, and return
-     * 
+     *
      * @param pigDto The object that will be used to create the new pig.
      * @return A ResponseEntity with the created URI and the newPig object.
      */
@@ -56,10 +59,13 @@ public class PigResource {
         var newPig = new Pig();
         BeanUtils.copyProperties(pigDto, newPig);
 
-        var stall = new Stall();
-        stall.setId(pigDto.getStallId());
+        var stall = this.stallService.findById(pigDto.getStallId()).get();
         newPig.setStall(stall);
         newPig = this.pigService.save(newPig);
+        newPig = this.findByIdWithStall(newPig.getId()).get();
+        if (newPig == null) {
+            return ResponseEntity.badRequest().build();
+        }
 
         return ResponseEntity.created(new URI("pigs/" + newPig.getId())).body(newPig);
     }

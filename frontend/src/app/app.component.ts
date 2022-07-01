@@ -21,7 +21,8 @@ export class AppComponent implements OnInit {
     this.items = [
       { label: 'Home', icon: 'pi pi-fw pi-home', routerLink: 'home' },
       { label: 'Relatórios', icon: 'pi pi-fw pi-calendar', routerLink: 'reports' },
-      { label: 'Abates', icon: 'pi pi-fw pi-calendar', routerLink: 'stalls' },
+      { label: 'Baias', icon: 'pi pi-fw pi-calendar', routerLink: 'stalls' },
+      { label: 'Add Baias', icon: 'pi pi-fw pi-calendar', routerLink: 'stalls/add' },
     ];
     this.activeItem = this.items[0];
   }

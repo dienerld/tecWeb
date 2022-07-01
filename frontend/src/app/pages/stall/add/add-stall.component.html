@@ -1,0 +1,56 @@
+<form
+  name="editForm"
+  (ngSubmit)="save()"
+  [formGroup]="editForm"
+  class="flex w-max"
+>
+  <div class="card mt-3">
+    <div class="formgrid grid flex justify-content-center">
+      <div class="col-8">
+        <span *ngIf="editForm.get(['id'])!.value">
+          <h1>ID: {{ editForm.get(['id'])!.value }}</h1>
+        </span>
+      </div>
+      <div class="field col-8 mt-3">
+        <span class="p-float-label">
+          <input
+            class="w-full border-round"
+            id="input-name"
+            type="text"
+            formControlName="name"
+            pInputText
+          />
+          <label for="input-name">Nome</label>
+        </span>
+        <div
+          *ngIf="
+            editForm.get('name')!.invalid &&
+            (editForm.get('name')!.dirty || editForm.get('name')!.touched)
+          "
+        >
+          <span>Nome é obrigatório.</span>
+        </div>
+      </div>
+
+      <div class="col-8 flex justify-content-end">
+        <button
+          pButton
+          class="mr-3"
+          type="button"
+          icon="pi pi-chevron-circle-left"
+          iconPos="left"
+          label="Cancelar"
+          routerLink="/bikes"
+        ></button>
+        <button
+          pButton
+          type="submit"
+          icon="pi pi-check"
+          iconPos="left"
+          label="Salvar"
+          [disabled]="editForm.invalid"
+        ></button>
+      </div>
+    </div>
+  </div>
+</form>

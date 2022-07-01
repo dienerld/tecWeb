@@ -13,6 +13,4 @@ public class StallDTO {
     @NotBlank
     private String name;
 
-    private Date lastRemoval;
-
 }

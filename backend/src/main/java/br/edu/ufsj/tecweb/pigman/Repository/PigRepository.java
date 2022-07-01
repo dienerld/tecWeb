@@ -13,7 +13,7 @@ public interface PigRepository extends JpaRepository<Pig, Long> {
     @EntityGraph(attributePaths = { "stall" })
     public Optional<Pig> findOneWithStallById(Long id);
 
-    @Query("select p from Pig p join fetch p.stall where p.id = ?1 and p.stall.name = ?2")
+    @Query("select p from Pig p join stall s on p.stall.id = s.id where s.id = ?2 and p.id = ?1")
     public Optional<Pig> findByIdAndStall(Long idPig, String nameStall);
 
 }

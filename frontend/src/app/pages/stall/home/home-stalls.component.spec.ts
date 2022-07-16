@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddStallComponent } from './add-stall.component';
+import { HomeStallsComponent } from './home-stalls.component';
 
-describe('AddStallComponent', () => {
-  let component: AddStallComponent;
-  let fixture: ComponentFixture<AddStallComponent>;
+describe('HomeStallsComponent', () => {
+  let component: HomeStallsComponent;
+  let fixture: ComponentFixture<HomeStallsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddStallComponent ]
+      declarations: [ HomeStallsComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AddStallComponent);
+    fixture = TestBed.createComponent(HomeStallsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { TPig } from '&services/reports.service';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-table',
@@ -7,9 +6,9 @@ import { TPig } from '&services/reports.service';
   styleUrls: ['./table.component.scss'],
 })
 
-export class TableComponent implements OnInit {
+export class TableComponent {
   @Input()
-    pigs: TPig[];
+    pigs: any[];
 
   @Input()
     columns = [];
@@ -18,6 +17,4 @@ export class TableComponent implements OnInit {
     description = '';
 
   constructor() { }
-
-  ngOnInit() {}
 }

@@ -1,10 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export type TSlaughter = {
   id: number,
-  weight: number,
+  netWeight: number,
   date: string,
+  sellPrice: number,
   stallId: number,
   stallName: string,
 }
@@ -13,14 +15,11 @@ export type TSlaughter = {
   providedIn: 'root',
 })
 export class SlaughterService {
-  constructor() { }
+  constructor(private readonly http: HttpClient) { }
 
-  private arr: TSlaughter[] = [
-    { stallId: 1, stallName: 'Stall 1', id: 1, weight: 1, date: '2020-01-01' },
-    { stallId: 2, stallName: 'Stall 2', id: 2, weight: 2, date: '2020-01-02' },
-    { stallId: 3, stallName: 'Stall 3', id: 3, weight: 3, date: '2020-01-03' },
-    { stallId: 4, stallName: 'Stall 4', id: 4, weight: 4, date: '2020-01-04' },
-  ];
+  private url = 'http://localhost:8080/api/v1/slaughters';
+
+  private arr: TSlaughter[] = [];
 
   // TODO: implementar o serviço de busca de ultimo abate de cada baia
   getLastTenStalls():Observable<TSlaughter[]> {
@@ -30,11 +29,23 @@ export class SlaughterService {
     });
   }
 
+  getSlaughter(id: number): Observable<TSlaughter> {
+    return this.http.get<TSlaughter>(`${this.url}/${id}`);
+  }
+
   // TODO: implementar o serviço de busca de ultimo abate geral
   getLastSlaughter():Observable<TSlaughter> {
     return new Observable<TSlaughter>((subscriber) => {
       subscriber.next(this.arr[0]);
       subscriber.complete();
     });
+  }
+
+  createSlaughter(slaughter: TSlaughter): Observable<TSlaughter> {
+    return this.http.post<TSlaughter>(this.url, slaughter);
+  }
+
+  updateSlaughter(slaughter: TSlaughter): Observable<TSlaughter> {
+    return this.http.put<TSlaughter>(`${this.url}/${slaughter.id}`, slaughter);
   }
 }

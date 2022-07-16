@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import br.edu.ufsj.tecweb.pigman.Domain.Slaugther;
 import br.edu.ufsj.tecweb.pigman.Service.PigService;
 import br.edu.ufsj.tecweb.pigman.Service.SlaugtherService;
-import br.edu.ufsj.tecweb.pigman.dtos.SlaugtherDTO;
 
-@RequestMapping("/slaugthers")
+@RequestMapping("/slaughters")
 @RestController
 public class SlaugtherResource {
 
@@ -34,12 +33,13 @@ public class SlaugtherResource {
     }
 
     @PostMapping
-    public ResponseEntity<Slaugther> create(@RequestBody SlaugtherDTO slaugtherDto) throws URISyntaxException {
+    public ResponseEntity<Slaugther> create(@RequestBody Slaugther slaugther) throws URISyntaxException {
         var newSlaugther = new Slaugther();
-        BeanUtils.copyProperties(slaugtherDto, newSlaugther);
-        var pig = this.pigService.findByIdAndStall(slaugtherDto.getIdPig(), newSlaugther.getStallName()).get();
-        System.out.println(pig);
-        newSlaugther.setPig(pig);
+        BeanUtils.copyProperties(slaugther, newSlaugther);
+        // // var pig = this.pigService.findByIdAndStall(Slaugther.getIdPig(),
+        // newSlaugther.getStallName()).get();
+        // System.out.println(pig);
+        // newSlaugther.setPig(pig);
 
         var slaugtherSaved = this.slaugtherService.save(newSlaugther);
         if (slaugtherSaved != null) {
@@ -51,13 +51,13 @@ public class SlaugtherResource {
 
     @PutMapping("/{id}")
     public ResponseEntity<Slaugther> update(@PathVariable(value = "id") Long id,
-            @RequestBody SlaugtherDTO slaugtherDto) throws Exception {
+            @RequestBody Slaugther Slaugther) throws Exception {
 
         var slaugther = this.slaugtherService.findById(id).get();
         if (slaugther == null) {
             return ResponseEntity.badRequest().build();
         }
-        BeanUtils.copyProperties(slaugtherDto, slaugther);
+        BeanUtils.copyProperties(Slaugther, slaugther);
         this.slaugtherService.save(slaugther);
 
         return ResponseEntity.ok(slaugther);

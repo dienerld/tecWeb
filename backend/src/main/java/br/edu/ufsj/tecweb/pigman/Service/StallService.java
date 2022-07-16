@@ -31,4 +31,8 @@ public class StallService {
         return this.repository.findById(id);
     }
 
+    public Optional<Stall> findByName(String name) {
+        return this.repository.findByName(name);
+    }
+
 }

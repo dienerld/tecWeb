@@ -5,19 +5,15 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.edu.ufsj.tecweb.pigman.Domain.Pig;
-import br.edu.ufsj.tecweb.pigman.Domain.Stall;
+import br.edu.ufsj.tecweb.pigman.Dtos.InputPigDto;
 import br.edu.ufsj.tecweb.pigman.Service.PigService;
 import br.edu.ufsj.tecweb.pigman.Service.StallService;
-import br.edu.ufsj.tecweb.pigman.dtos.PigDTO;
 
-// @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/pigs")
 public class PigResource {
@@ -35,45 +31,30 @@ public class PigResource {
         return this.pigService.findAll();
     }
 
-    /**
-     * > This function returns a pig with its stall
-     *
-     * @param id the id of the pig
-     * @return A pig with a stall.
-     */
     @GetMapping("/{id}")
     public Optional<Pig> findByIdWithStall(@PathVariable(value = "id") Long id) {
-        return this.pigService.findByIdWithStall(id);
+        return this.pigService.findById(id);
     }
 
-    /**
-     * > We create a new pig, copy the properties from the DTO to the new pig, set
-     * the stall id, save
-     * the new pig, and return
-     *
-     * @param pigDto The object that will be used to create the new pig.
-     * @return A ResponseEntity with the created URI and the newPig object.
-     */
     @PostMapping()
-    public ResponseEntity<Pig> create(@RequestBody PigDTO pigDto) throws URISyntaxException {
-        var newPig = new Pig();
-        BeanUtils.copyProperties(pigDto, newPig);
-
-        var stall = this.stallService.findById(pigDto.getStallId()).get();
-        newPig.setStall(stall);
-        newPig = this.pigService.save(newPig);
-        newPig = this.findByIdWithStall(newPig.getId()).get();
-        if (newPig == null) {
+    public ResponseEntity<Pig> create(@RequestBody InputPigDto pigDto) throws URISyntaxException {
+        var stall = this.stallService.findByName(pigDto.getNameStall());
+        if (!stall.isPresent()) {
             return ResponseEntity.badRequest().build();
         }
 
+        var pig = new Pig();
+        BeanUtils.copyProperties(pigDto, pig);
+        pig.setStall(stall.get());
+
+        var newPig = this.pigService.save(pig);
         return ResponseEntity.created(new URI("pigs/" + newPig.getId())).body(newPig);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Pig> update(
             @PathVariable(value = "id") Long id,
-            @RequestBody @Valid PigDTO pigDto) throws Exception {
+            @RequestBody Pig pigDto) throws Exception {
 
         var pig = this.pigService.findById(id).get();
 

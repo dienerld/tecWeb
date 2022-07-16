@@ -16,6 +16,7 @@ export class ReportsComponent implements OnInit {
     { field: 'id', header: 'Id' },
     { field: 'name', header: 'Name' },
     { field: 'lastRemoval', header: 'LastRemoval' },
+    { field: 'totalPigs', header: 'Quantidade' },
   ];
 
   constructor(
@@ -27,8 +28,6 @@ export class ReportsComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getReports().subscribe((pigs) => {
-      console.log(pigs);
-
       this.pigs = pigs;
     });
   }

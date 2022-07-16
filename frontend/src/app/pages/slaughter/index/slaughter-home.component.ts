@@ -20,7 +20,6 @@ export class SlaughterHomeComponent implements OnInit {
     { field: 'stallName', header: 'Nome da Baia' },
     { field: 'weight', header: 'Peso' },
     { field: 'date', header: 'Data' },
-
   ];
 
   constructor(

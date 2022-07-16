@@ -37,16 +37,8 @@ public class PigService {
         this.repository.deleteById(id);
     }
 
-    public Optional<Pig> findByIdAndStall(Long id, String nameStall) {
-        return this.repository.findByIdAndStall(id, nameStall);
-    }
-
     public Optional<Pig> findById(Long id) {
         return this.repository.findById(id);
-    }
-
-    public Optional<Pig> findByIdWithStall(Long id) {
-        return this.repository.findOneWithStallById(id);
     }
 
 }

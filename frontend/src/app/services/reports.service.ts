@@ -6,6 +6,7 @@ export type TPig = {
   name: string;
   lastRemoval: string;
   id: number;
+  totalPigs: number;
 }
 
 @Injectable({

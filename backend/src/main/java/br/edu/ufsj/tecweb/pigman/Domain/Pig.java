@@ -41,13 +41,12 @@ public class Pig {
     @Column(nullable = false, name = "updated_at")
     private Date updated_at;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
+    @JoinColumn(name = "stall_id", nullable = false)
     @JsonIgnore
-    @JoinColumn(name = "stall_id")
     private Stall stall;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "pig")
-    @JsonIgnore
+    @OneToOne(mappedBy = "pig")
     private Slaugther slaugther;
 
 }

@@ -14,6 +14,8 @@ import { StallService } from '&services/stall.service';
 export class AddStallComponent implements OnInit {
   editForm: FormGroup;
 
+  stallId: number;
+
   constructor(
     protected readonly stallService: StallService,
     protected readonly activatedRoute: ActivatedRoute,
@@ -30,9 +32,9 @@ export class AddStallComponent implements OnInit {
       name: ['', [Validators.required]],
     });
     this.activatedRoute.params.subscribe((params) => {
-      const stallId = params['id'];
-      if (stallId) {
-        this.stallService.getStall(stallId)
+      this.stallId = params['id'];
+      if (this.stallId) {
+        this.stallService.getStall(this.stallId)
           .subscribe((response) => {
             this.updateForm(response);
           });
@@ -43,6 +45,8 @@ export class AddStallComponent implements OnInit {
   save(): void {
     if (this.editForm.valid) {
       const stall = this.editForm.value as Stall;
+      stall.id = this.stallId;
+
       if (stall.id) {
         this.stallService.updateStall(stall)
           .subscribe((response) => {

@@ -22,6 +22,7 @@ module.exports = {
     'import/extensions': ['off'],
     'no-unused-vars': ['error', { args: 'none' }],
     'no-useless-constructor': 'off',
+    camelcase: 'off',
     'no-empty-function': [
       'error',
       { allow: ['functions', 'arrowFunctions', 'constructors'] },

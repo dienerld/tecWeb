@@ -4,9 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -25,7 +23,7 @@ public class Stall {
     @Column(name = "last_removal")
     private Date lastRemoval;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     @Column(name = "weight_average")
@@ -39,11 +37,7 @@ public class Stall {
     @Column(name = "updated_at")
     private Date updated_at;
 
-    @OneToMany(mappedBy = "stall", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @OneToMany(mappedBy = "stall")
     private List<Pig> pigs;
 
-    @OneToMany(mappedBy = "stall")
-    @JsonIgnore
-    private List<Food> foods;
 }

@@ -2,9 +2,9 @@
   name="editForm"
   (ngSubmit)="save()"
   [formGroup]="editForm"
-  class="flex w-max"
+  class="flex flex-auto flex-column align-content-center h-full"
 >
-  <div class="card mt-3">
+  <div class="card mt-3 shadow-3 p-5">
     <div class="formgrid grid flex justify-content-center">
       <div class="col-8">
         <span *ngIf="editForm.get(['id'])!.value">
@@ -30,6 +30,44 @@
         >
           <span>Nome é obrigatório.</span>
         </div>
+      </div>
+
+      <div class="field col-8 mt-3">
+        <span class="p-label">
+          <label for="input-sellPrice">Preço</label>
+          <p-inputNumber
+            class="w-full border-round"
+            id="input-sellPrice"
+            type="number"
+            locale="pt-br"
+            [minFractionDigits]="2"
+            formControlName="sellPrice"
+          ></p-inputNumber>
+        </span>
+      </div>
+      <div class="field col-8 mt-3">
+        <span class="p-label">
+          <label for="input-netWeight">Peso</label>
+          <p-inputNumber
+            class="w-full border-round"
+            id="input-netweight"
+            type="number"
+            [minFractionDigits]="2"
+            formControlName="netWeight"
+          ></p-inputNumber>
+        </span>
+      </div>
+
+      <div class="field col-8 mt-3">
+        <span class="p-float-label">
+          <p-calendar
+            id="input-date"
+            formControlName="date"
+            [showIcon]="true"
+            [dateFormat]="'dd/mm/yy'"
+          ></p-calendar>
+          <label for="input-date">Data</label>
+        </span>
       </div>
 
       <div class="col-8 flex justify-content-end">

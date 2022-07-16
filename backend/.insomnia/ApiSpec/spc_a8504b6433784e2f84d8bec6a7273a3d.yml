@@ -1,10 +1,10 @@
-_id: spc_a8504b6433784e2f84d8bec6a7273a3d
-type: ApiSpec
-parentId: wrk_73b2d6f6c364491a8faa157b3d1fba62
-modified: 1656432021812
-created: 1654106373527
-fileName: pigMan.yaml
-contents: |-
+# _id: spc_a8504b6433784e2f84d8bec6a7273a3d
+# type: ApiSpec
+# parentId: wrk_73b2d6f6c364491a8faa157b3d1fba62
+# modified: 1656432021812
+# created: 1654106373527
+# fileName: pigMan.yaml
+# contents: |-
   openapi: 3.0.0
   info:
     description: "Api para sistema de gerenciamento de granjas de suíno"
@@ -446,4 +446,4 @@ contents: |-
             updated_at:
               type: string
               format: date-time
-contentType: yaml
+# contentType: yaml

@@ -3,8 +3,9 @@ export class Stall {
     public id: number,
     public name: string,
     public weightAverage: number,
+    public totalPigs?: number,
     public lastRemoval?: Date,
-    public createdAt?: Date,
-    public updatedAt?: Date,
+    public updated_at?,
+
   ) {}
 }

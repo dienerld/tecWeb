@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,6 +30,7 @@ public class Slaugther {
     private String stallName;
 
     @OneToOne()
+    @JsonIgnore()
     @JoinColumn(name = "pig_fk_id", referencedColumnName = "id")
     private Pig pig;
 

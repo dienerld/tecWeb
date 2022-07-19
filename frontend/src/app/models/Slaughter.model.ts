@@ -7,6 +7,7 @@ export class Slaughter implements TSlaughter {
     public date: string,
     public sellPrice: number,
     public stallId: number,
+    public pigId: number,
     public stallName: string,
-  ) {}
+  ) { }
 }

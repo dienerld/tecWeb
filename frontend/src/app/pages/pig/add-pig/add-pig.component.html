@@ -17,61 +17,69 @@
         <p-treeSelect
           formControlName="stallId"
           id="stallId"
-          [(ngModel)]="selectedNode"
           [options]="stalls"
           selectionMode="single"
           placeholder="Selecionar Baia"
-          (onNodeSelect)="onNodeSelect($event)"
         ></p-treeSelect>
       </div>
 
       <div class="field col-8 mt-3">
-        <h3>Porco</h3>
+        <h3>Sexo</h3>
         <p-treeSelect
-          formControlName="pigId"
-          id="pigId"
-          [(ngModel)]="selectedPig"
-          [options]="pigs"
+          formControlName="sex"
+          id="sex"
+          [options]="arrSex"
           selectionMode="single"
-          placeholder="Selecionar Porco"
+          placeholder="Selecionar Sexo"
         ></p-treeSelect>
       </div>
 
-      <div class="field col-8 mt-3">
-        <span class="p-label">
-          <label for="input-sellPrice">Preço</label>
-          <p-inputNumber
-            class="w-full border-round"
-            id="input-sellPrice"
-            type="number"
-            locale="pt-br"
-            [minFractionDigits]="2"
-            formControlName="sellPrice"
-          ></p-inputNumber>
-        </span>
-      </div>
       <div class="field col-8 mt-3">
         <span class="p-label">
           <label for="input-netWeight">Peso</label>
           <p-inputNumber
             class="w-full border-round"
-            id="input-netweight"
+            id="input-weight"
             type="number"
             [minFractionDigits]="2"
-            formControlName="netWeight"
+            formControlName="weight"
           ></p-inputNumber>
         </span>
       </div>
 
       <div class="field col-8 mt-3">
+        <h3>Data de Nascimento</h3>
         <span class="p-float-label">
           <p-calendar
-            id="input-date"
-            formControlName="date"
+            id="input-birthDate"
+            formControlName="birthDate"
             [showIcon]="true"
             [dateFormat]="'dd/mm/yy'"
           ></p-calendar>
-          <label for="input-date">Data</label>
+        </span>
+      </div>
+
+      <div class="field col-8 mt-3">
+        <h3>Data de Entrada</h3>
+        <span class="p-float-label">
+          <p-calendar
+            id="input-entryDate"
+            formControlName="entryDate"
+            [showIcon]="true"
+            [dateFormat]="'dd/mm/yy'"
+          ></p-calendar>
+        </span>
+      </div>
+
+      <div class="field col-8 mt-3">
+        <h3>Data de Vermifugação</h3>
+        <span class="p-float-label">
+          <p-calendar
+            id="input-lastVermifuge"
+            formControlName="lastVermifuge"
+            [showIcon]="true"
+            [dateFormat]="'dd/mm/yy'"
+          ></p-calendar>
         </span>
       </div>
 

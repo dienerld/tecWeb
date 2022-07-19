@@ -10,6 +10,7 @@ import { SliderModule } from 'primeng/slider';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { CardModule } from 'primeng/card';
 import { CalendarModule } from 'primeng/calendar';
+import { TreeSelectModule } from 'primeng/treeselect';
 
 import { ButtonModule } from 'primeng/button';
 import { HttpClientModule } from '@angular/common/http';
@@ -26,6 +27,7 @@ import { ListAllStallsComponent } from './pages/stall/list/list-all-stalls.compo
 import { HomeStallsComponent } from './pages/stall/home/home-stalls.component';
 import { AddSlaughterComponent } from './pages/slaughter/add/add-slaughter.component';
 import { SlaughterHomeComponent } from './pages/slaughter/index/slaughter-home.component';
+import { AddPigComponent } from './pages/pig/add-pig/add-pig.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { SlaughterHomeComponent } from './pages/slaughter/index/slaughter-home.c
     ListAllStallsComponent,
     HomeStallsComponent,
     AddSlaughterComponent,
+    AddPigComponent,
   ],
   imports: [
     HttpClientModule,
@@ -57,6 +60,7 @@ import { SlaughterHomeComponent } from './pages/slaughter/index/slaughter-home.c
     SliderModule,
     CardModule,
     InputNumberModule,
+    TreeSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

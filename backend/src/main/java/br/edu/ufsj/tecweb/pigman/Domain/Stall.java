@@ -38,6 +38,7 @@ public class Stall {
     private Date updated_at;
 
     @OneToMany(mappedBy = "stall")
+    @JsonIgnore()
     private List<Pig> pigs;
 
 }

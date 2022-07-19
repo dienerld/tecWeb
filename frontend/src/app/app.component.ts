@@ -19,10 +19,15 @@ export class AppComponent implements OnInit {
     this.primengConfig.ripple = true;
 
     this.items = [
-      { label: 'Home', icon: 'pi pi-fw pi-home', routerLink: 'home' },
-      { label: 'Relatórios', icon: 'pi pi-fw pi-calendar', routerLink: 'reports' },
-      { label: 'Baias', icon: 'pi pi-fw pi-calendar', routerLink: 'stalls' },
-      { label: 'Add Baias', icon: 'pi pi-fw pi-calendar', routerLink: 'stalls/add' },
+      { label: 'Home', routerLink: 'home' },
+      { label: 'Relatórios', routerLink: 'reports' },
+      { label: 'Baias', routerLink: 'stalls' },
+      { label: 'Adicionar Baias', routerLink: 'stalls/add' },
+
+      { label: 'Abates', routerLink: 'slaughters' },
+      { label: 'Adicionar Abate', routerLink: 'slaughters/add' },
+
+      { label: 'Adicionar Porco', routerLink: 'pigs/add' },
     ];
     this.activeItem = this.items[0];
   }

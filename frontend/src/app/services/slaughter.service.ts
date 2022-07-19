@@ -8,6 +8,7 @@ export type TSlaughter = {
   date: string,
   sellPrice: number,
   stallId: number,
+  pigId: number,
   stallName: string,
 }
 

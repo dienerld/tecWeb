@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import br.edu.ufsj.tecweb.pigman.Domain.Pig;
+import br.edu.ufsj.tecweb.pigman.Domain.Stall;
 import br.edu.ufsj.tecweb.pigman.Repository.PigRepository;
 
 @Service
@@ -39,6 +40,10 @@ public class PigService {
 
     public Optional<Pig> findById(Long id) {
         return this.repository.findById(id);
+    }
+
+    public List<Pig> findPigsByStall(Stall stall) {
+        return this.repository.findByStall(stall);
     }
 
 }

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.edu.ufsj.tecweb.pigman.Domain.Slaugther;
+import br.edu.ufsj.tecweb.pigman.Dtos.InputSlaughterDto;
 import br.edu.ufsj.tecweb.pigman.Service.PigService;
 import br.edu.ufsj.tecweb.pigman.Service.SlaugtherService;
 
@@ -33,13 +34,13 @@ public class SlaugtherResource {
     }
 
     @PostMapping
-    public ResponseEntity<Slaugther> create(@RequestBody Slaugther slaugther) throws URISyntaxException {
+    public ResponseEntity<Slaugther> create(@RequestBody InputSlaughterDto slaugther) throws URISyntaxException {
         var newSlaugther = new Slaugther();
-        BeanUtils.copyProperties(slaugther, newSlaugther);
-        // // var pig = this.pigService.findByIdAndStall(Slaugther.getIdPig(),
-        // newSlaugther.getStallName()).get();
-        // System.out.println(pig);
-        // newSlaugther.setPig(pig);
+        var pig = this.pigService.findById(slaugther.getPigId());
+        if (pig.isPresent()) {
+            BeanUtils.copyProperties(slaugther, newSlaugther);
+            newSlaugther.setPig(pig.get());
+        }
 
         var slaugtherSaved = this.slaugtherService.save(newSlaugther);
         if (slaugtherSaved != null) {

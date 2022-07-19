@@ -10,7 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.edu.ufsj.tecweb.pigman.Domain.Pig;
+import br.edu.ufsj.tecweb.pigman.Domain.Stall;
 import br.edu.ufsj.tecweb.pigman.Dtos.InputPigDto;
+import br.edu.ufsj.tecweb.pigman.Dtos.OutputPigDto;
 import br.edu.ufsj.tecweb.pigman.Service.PigService;
 import br.edu.ufsj.tecweb.pigman.Service.StallService;
 
@@ -32,13 +34,27 @@ public class PigResource {
     }
 
     @GetMapping("/{id}")
-    public Optional<Pig> findByIdWithStall(@PathVariable(value = "id") Long id) {
-        return this.pigService.findById(id);
+    public OutputPigDto findByIdWithStall(@PathVariable(value = "id") Long id) {
+        var pig = this.pigService.findById(id).get();
+        var outputPig = new OutputPigDto();
+        BeanUtils.copyProperties(pig, outputPig);
+        outputPig.setStallId(pig.getStall().getId());
+        outputPig.setStallName(pig.getStall().getName());
+
+        return outputPig;
+    }
+
+    @GetMapping("/stall/{id}")
+    public List<Pig> findPigsByStall(@PathVariable(value = "id") Long id) {
+        var stall = new Stall();
+        stall.setId(id);
+        return this.pigService.findPigsByStall(stall);
     }
 
     @PostMapping()
     public ResponseEntity<Pig> create(@RequestBody InputPigDto pigDto) throws URISyntaxException {
-        var stall = this.stallService.findByName(pigDto.getNameStall());
+        System.out.println(pigDto.getEntryDate());
+        var stall = this.stallService.findByName(pigDto.getStallName());
         if (!stall.isPresent()) {
             return ResponseEntity.badRequest().build();
         }

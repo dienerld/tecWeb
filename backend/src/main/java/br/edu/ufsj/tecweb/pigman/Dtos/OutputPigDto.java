@@ -7,12 +7,12 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class InputPigDto {
-    private String sex;
-    private String stallName;
-    private Float weight;
-    private Date lastVermifuge;
+public class OutputPigDto {
+    private Long id;
     private Date entryDate;
-    private Date birthDate;
-
+    private String sex;
+    private Date lastVerfimuge;
+    private Float weight;
+    private String stallName;
+    private Long stallId;
 }
